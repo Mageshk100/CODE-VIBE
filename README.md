@@ -1,110 +1,200 @@
-# Code Vibe — AI-Powered Coding Workspace
+# Code Vibe — Your AI-Powered Coding Companion
 
-> **Phase 1 (Complete Frontend)** & **Phase 2 (Backend, MySQL & Authentication Complete)**
+**Understand code better. Learn faster. Build with confidence.**
 
-Code Vibe empowers learners to paste code, upload individual source files, receive structured step-by-step explanations, and ask follow-up questions within a persistent coding session.
+Code Vibe is an AI-powered coding workspace designed to help students and developers understand code more easily. Instead of simply displaying code, it breaks down how a program works through structured, step-by-step explanations.
+
+You can paste code or upload a source file, explore its logic, ask follow-up questions, and revisit your previous coding sessions — all in one workspace.
+
+🌐 **Live Website:** [https://code-vibe-seven.vercel.app/](https://code-vibe-seven.vercel.app/)
 
 ---
 
-## 1. System Architecture
+## ✨ What Can You Do with Code Vibe?
 
-```
-Code Vibe Platform
-├── Frontend (React 19 + Vite + Tailwind CSS + Monaco Editor + Three.js)
-│   ├── Authentication via Firebase Auth (Email/Password, Google Sign-in, Password Reset)
-│   ├── Unified API Client (Automatic Bearer Token injection)
-│   ├── Main Coding Workspace (Desktop Resizable Split, Mobile Segmented View)
-│   ├── Monaco Code Editor with 5 languages & file uploads (.py, .java, .c, .cpp, .js)
-│   ├── Structured 5-Part AI Breakdown & Contextual Follow-up Chat
-│   └── Multi-Theme Support (Light, Dark, System)
+- **Understand Your Code:** Get structured, step-by-step AI explanations of your code.
+- **Upload Source Files:** Upload individual `.py`, `.java`, `.c`, `.cpp`, and `.js` files.
+- **Ask Follow-up Questions:** Continue the conversation and clarify specific parts of your code.
+- **Save Coding Sessions:** Registered users can revisit their previous explanations and conversations.
+- **Code in a Familiar Environment:** Use the Monaco Editor with syntax highlighting.
+- **Choose Your Theme:** Switch between Light, Dark, and System modes.
+- **Access Your Workspace Anywhere:** Use the responsive interface on desktop and mobile.
+
+## 🏗️ Tech Stack
+
+| Area | Technologies |
+|---|---|
+| Frontend | React 19, Vite, Tailwind CSS |
+| Code Editor | Monaco Editor |
+| UI & Animations | Three.js |
+| Backend | Node.js, Express.js |
+| Database | MySQL, mysql2 |
+| Authentication | Firebase Authentication, Firebase Admin SDK |
+| AI Integration | Google Gemini API |
+| Security | Helmet, CORS, Rate Limiting |
+
+## 🧩 System Architecture
+
+```text
+Code Vibe
 │
-└── Backend (Node.js + Express.js + MySQL + Firebase Admin SDK)
-    ├── Security: Helmet, CORS, Rate Limiting, Centralized Error Handling
-    ├── Auth Verification: Bearer ID-token decoding & MySQL profile synchronization
-    ├── Role-Based Access Control: 'student' and 'admin' roles
-    ├── Database: MySQL (mysql2 connection pooling + migration system)
-    │   ├── users table (firebase_uid, email, display_name, role)
-    │   ├── coding_sessions table (user_id FK, title, language, original_code, explanation)
-    │   └── chat_messages table (session_id FK, role, message)
-    ├── Session Ownership: Strict user isolation (students cannot access each other's sessions)
-    └── Admin APIs: Protected metrics & user listings (/api/admin/stats, /api/admin/users)
+├── Frontend
+│   ├── React 19 + Vite
+│   ├── Tailwind CSS + Three.js
+│   ├── Monaco Code Editor
+│   ├── Firebase Authentication
+│   ├── Unified API Client
+│   ├── AI Explanation Workspace
+│   └── Follow-up Chat
+│
+└── Backend
+    ├── Node.js + Express.js
+    ├── Firebase Admin Authentication
+    ├── Google Gemini API
+    ├── MySQL Connection Pool
+    ├── Session Management
+    ├── Role-Based Access Control
+    └── Protected Admin APIs
 ```
 
----
+## 🔐 Authentication & Data Management
 
-## 2. Quick Start & Local Setup
+Code Vibe uses Firebase Authentication for account management and MySQL for persistent user data.
+
+Key features include:
+
+- Email and password registration and login.
+- Google sign-in and password reset flows.
+- Backend verification of Firebase ID tokens.
+- Automatic synchronization of user profiles with MySQL.
+- Role-based access for students and administrators.
+- Session ownership checks to keep user data private.
+- Separate guest sessions and registered-user sessions.
+
+## 🗄️ Database Structure
+
+The application uses three primary MySQL tables:
+
+| Table | Purpose |
+|---|---|
+| `users` | Stores user profiles, Firebase UIDs, email addresses, and roles. |
+| `coding_sessions` | Stores submitted code, language, explanations, and session details. |
+| `chat_messages` | Stores user and AI messages associated with coding sessions. |
+
+Foreign key constraints maintain relationships between users, sessions, and chat messages.
+
+## 🚀 Getting Started
+
+Want to run Code Vibe locally? Follow these steps.
 
 ### Prerequisites
-- Node.js (v20+)
-- npm (v9+)
-- MySQL (Optional for local development; server features an automatic fallback store if MySQL daemon is not running)
 
-### 1. Install Dependencies
+- Node.js v20 or later
+- npm v9 or later
+- MySQL (optional for local development; a fallback store is available when the MySQL service is unavailable)
+
+### 1. Clone the Repository
+
 ```bash
-# Install frontend dependencies
-npm install
-
-# Install backend dependencies
-cd backend && npm install && cd ..
+git clone https://github.com/Mageshk100/CODE-VIBE.git
+cd CODE-VIBE
 ```
 
-### 2. Environment Configuration
-The repository includes `.env.example` templates:
-- `backend/.env.example` -> `backend/.env`
-- `.env.example` -> `.env`
+### 2. Install Dependencies
 
-Default configuration works out of the box with development tokens and local fallback persistence.
+```bash
+# Frontend dependencies
+npm install
 
-### 3. Start Backend & Frontend
-In separate terminal tabs:
+# Backend dependencies
+cd backend
+npm install
+cd ..
+```
 
-**Terminal 1 — Backend:**
+### 3. Configure Environment Variables
+
+Create your environment files using the provided templates:
+
+- Copy `.env.example` to `.env`.
+- Copy `backend/.env.example` to `backend/.env`.
+
+Add the required Firebase, Gemini, and database configuration values.
+
+**Note:** Use your own credentials. Never commit `.env` files or expose API keys and service account credentials publicly.
+
+### 4. Start the Backend
+
+Open a terminal:
+
 ```bash
 cd backend
 npm start
 ```
-*Backend runs on `http://localhost:5000` (Health Check: `http://localhost:5000/api/health`)*
 
-**Terminal 2 — Frontend:**
+Backend runs at:
+
+`http://localhost:5000`
+
+Health check:
+
+`http://localhost:5000/api/health`
+
+### 5. Start the Frontend
+
+Open another terminal from the project root:
+
 ```bash
 npm run dev
 ```
-*Frontend runs on `http://localhost:5173`*
+
+Frontend runs at:
+
+`http://localhost:5173`
+
+## 🧪 Testing & Verification
+
+The project includes automated test and verification scripts.
+
+| Test Suite | Reported Result |
+|---|---:|
+| Backend Integration Tests | 25/25 |
+| Full-Stack Verification | 17/17 |
+| Frontend Quality Audit | 58/58 |
+| Production Build | `npm run build` |
+
+Run the tests from the project root:
+
+```bash
+# Backend integration tests
+node backend/scripts/test_backend.mjs
+
+# Full-stack verification
+node scripts/test_phase2_fullstack.mjs
+
+# Frontend quality audit
+node scripts/audit_suite.mjs
+
+# Production build
+npm run build
+```
+
+## 📌 Project Status
+
+- **Phase 1 — Frontend Development:** Completed.
+- **Phase 2 — Backend, MySQL & Authentication:** Completed.
+- **Phase 3 — AI Integration & Production Deployment:** Integrated and deployed; ongoing testing and improvements.
+
+## 🌱 What's Next?
+
+Code Vibe is an evolving project. The focus is on improving explanation quality, making AI interactions more reliable, and refining the overall learning experience.
+
+## 👨‍💻 About the Project
+
+Built as a practical project to make programming easier to understand through AI-assisted learning.
+
+**Code Vibe — Don't just read code. Understand it.**
 
 ---
 
-## 3. Testing & Verification
-
-Run the automated integration test suites:
-
-- **Backend Integration Tests** (25/25 Tests):
-  ```bash
-  node backend/scripts/test_backend.mjs
-  ```
-- **Full-Stack Verification** (17/17 Tests):
-  ```bash
-  node scripts/test_phase2_fullstack.mjs
-  ```
-- **Frontend Quality Audit** (58/58 Tests):
-  ```bash
-  node scripts/audit_suite.mjs
-  ```
-- **Production Build**:
-  ```bash
-  npm run build
-  ```
-
----
-
-## 4. Phase 2 Deliverables Summary
-
-1. **Express Backend**: Modular architecture in `backend/` with controllers, services, middleware, and routes.
-2. **MySQL Database**: `mysql2` connection pooling, migrations (`001_create_tables.sql`), and health check (`/api/health/db`).
-3. **Firebase Authentication**: Client SDK (`firebase/auth`) + Backend token verification (`firebase-admin`).
-4. **Auth Flows**: Email/password registration, login, Google sign-in, password reset, and logout.
-5. **Roles & RBAC**: `student` and `admin` roles; admin APIs protected with `authorize('admin')`.
-6. **Owner-Controlled Admin Creation**: CLI script `backend/scripts/createAdmin.js`.
-7. **Session Ownership Enforcement**: Students can only access and message their own sessions (returns 403 otherwise).
-8. **Guest Access**: Temporary local sessions with configurable expiry, completely separated from MySQL registered data.
-9. **Persistent Registered Sessions**: Coding sessions and follow-up chat messages stored in the database.
-10. **Admin APIs**: Protected endpoints for user metrics (`/api/admin/stats`) and listings (`/api/admin/users`).
+⭐ If you find Code Vibe useful, consider giving the repository a star!
