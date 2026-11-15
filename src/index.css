@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-main: #F8F9FB;
+    --bg-surface: #FFFFFF;
+    --border-subtle: #E3E6EB;
+    --text-primary: #17191D;
+    --text-muted: #757E8D;
+    --gold-primary: #D4AF37;
+    --gold-glow: #FFC928;
+  }
+
+  .dark {
+    --bg-main: #0F1013;
+    --bg-surface: #17191D;
+    --border-subtle: #262A33;
+    --text-primary: #F8F9FB;
+    --text-muted: #C5CBD3;
+    --gold-primary: #D4AF37;
+    --gold-glow: #FFC928;
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  /* Custom scrollbars */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(197, 203, 211, 0.4);
+    border-radius: 9999px;
+  }
+
+  .dark ::-webkit-scrollbar-thumb {
+    background: rgba(53, 58, 69, 0.6);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(212, 175, 55, 0.5);
+  }
+}
+
+/* Metallic gradient accent utility */
+.metallic-gold-text {
+  background: linear-gradient(135deg, #FFF0A6 0%, #D4AF37 50%, #FFD700 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.metallic-gold-border {
+  border-image: linear-gradient(to bottom right, #D4AF37, #FFF0A6, #2A2E38) 1;
+}
+
+.gold-gradient-bg {
+  background: linear-gradient(135deg, #D4AF37 0%, #B8972E 100%);
+}
+
+.gold-glass {
+  background: rgba(212, 175, 55, 0.05);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+}
