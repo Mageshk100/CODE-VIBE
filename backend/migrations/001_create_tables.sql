@@ -1,7 +1,6 @@
 -- Code Vibe Database Schema Migration 001
-
-CREATE DATABASE IF NOT EXISTS code_vibe CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE code_vibe;
+-- Note: Database creation and selection is handled by migrate.js via DB_NAME env var.
+-- Do NOT add CREATE DATABASE or USE statements here — they break managed hosts (Railway, PlanetScale, etc.)
 
 -- Table 1: users
 CREATE TABLE IF NOT EXISTS users (
